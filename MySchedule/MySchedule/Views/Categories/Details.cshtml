@@ -11,12 +11,12 @@
     <hr />
     <dl class="dl-horizontal">
         <!--<dt>
-            @Html.DisplayNameFor(model => model.ApplicationUserID)
-        </dt>-->
+            @@Html.DisplayNameFor(model => model.ApplicationUserID)
+        </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ApplicationUserID)
-        </dd>
+            @@Html.DisplayFor(model => model.ApplicationUserID)
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.Description)
@@ -39,7 +39,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Colour)
+            <input type="color" class="form-control" value="@Model.Colour" disabled/>
+            <!--@@Html.DisplayFor(model => model.Colour, new { htmlAttributes = new { @@type = "color" } })-->
         </dd>
 
     </dl>
