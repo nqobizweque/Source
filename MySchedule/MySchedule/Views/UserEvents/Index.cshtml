@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MySchedule.Models.UserEvent>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.ApplicationUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location.ApplicationUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Module.ApplicationUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reminder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Recurring)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecurBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecurIntervals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.ApplicationUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.ApplicationUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Module.ApplicationUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reminder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Recurring)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecurBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecurIntervals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserEventID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UserEventID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserEventID })
+        </td>
+    </tr>
+}
+
+</table>

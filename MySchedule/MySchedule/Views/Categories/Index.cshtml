@@ -1,0 +1,147 @@
+﻿@model MySchedule.ViewModels.AdminViewModel
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h1>Admin</h1>
+<h3>E - Edit, D - Details, X - Delete </h3>
+<div class="row">
+    <!--Categories-->
+    <div class="col-md-4">
+        <h2>Categories</h2>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table-hover table-striped" >
+            <tr>
+                <!--<th>
+                @@Html.DisplayNameFor(model => model.ApplicationUserID)
+            </th>-->
+                <th style="padding-right: 10px!important;">
+                    Description
+                </th>
+                <th style="padding-right: 10px!important;">
+                    Abbreviation
+                </th>
+                <th style="padding-right: 10px!important;">
+                    Colour
+                </th>
+                <th></th>
+            </tr>
+            @{
+                var categories = Model.Categories;
+                foreach (var item in categories)
+                {
+                    <tr>
+                        <!--<td>
+                        @@Html.DisplayFor(modelItem => item.ApplicationUserID)
+                    </td>-->
+                        <td style="padding-right: 10px!important;">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td style="padding-right: 10px!important;">
+                            @Html.DisplayFor(modelItem => item.Abbreviation)
+                        </td>
+                        <td style="padding-right: 10px!important;">
+                            @Html.DisplayFor(modelItem => item.Colour)
+                        </td>
+                        <td style="padding-right: 10px!important;">
+                            @Html.ActionLink("E", "Edit", new { id = item.CategoryID }) |
+                            @Html.ActionLink("D", "Details", new { id = item.CategoryID }) |
+                            @Html.ActionLink("X", "Delete", new { id = item.CategoryID })
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+
+
+        
+    </div>
+
+
+    <!--Locations-->
+    <div class="col-md-4">
+        <h2>Locations</h2>
+        <p>
+            @Html.ActionLink("Create New", "Create", "Locations")
+        </p>
+        <table class="table-hover table-striped" style="padding-right: 10px!important;">
+            <tr>
+                <!--<th>
+                    @@Html.DisplayNameFor(model => model.ApplicationUserID)
+                </th>-->
+                <th style="padding-right: 10px!important;">
+                    Venue
+                </th>
+                <th style="padding-right: 10px!important;">
+                    Address
+                </th>
+                <th></th>
+            </tr>
+            @{
+                var locations = Model.Locations;
+                foreach (var item in locations)
+                {
+                    <tr>
+                        <td style="padding-right: 10px!important;">
+                            @Html.DisplayFor(modelItem => item.Venue)
+                        </td>
+                        <td style="padding-right: 10px!important;">
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td style="padding-right: 10px!important;">
+                            @Html.ActionLink("E", "Edit", "Locations", new { id = item.LocationID }, null) |
+                            @Html.ActionLink("D", "Details", "Locations", new { id = item.LocationID }, null) |
+                            @Html.ActionLink("X", "Delete", "Locations", new { id = item.LocationID }, null)
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+
+    <div class="col-md-4">
+        <h2>Modules</h2>
+        <p>
+            @Html.ActionLink("Create New", "Create", "Modules")
+        </p>
+        <table class="table-hover table-striped" style="padding-right: 10px!important;">
+            <tr>
+                <!--<th>
+                @@Html.DisplayNameFor(model => model.ApplicationUserID)
+            </th>-->
+                <th style="padding-right: 10px!important;">
+                    Code
+                </th>
+                <th style="padding-right: 10px!important;">
+                    Description
+                </th>
+                <th></th>
+            </tr>
+            @{
+                var modules = Model.Modules;
+                foreach (var item in modules)
+                {
+                    <tr>
+                        <td style="padding-right: 10px!important;">
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td style="padding-right: 10px!important;">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td style="padding-right: 10px!important;">
+                            @Html.ActionLink("E", "Edit", "Modules", new { id = item.ModuleID }, null) |
+                            @Html.ActionLink("D", "Details", "Modules", new { id = item.ModuleID }, null) |
+                            @Html.ActionLink("X", "Delete", "Modules", new { id = item.ModuleID }, null)
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+
+

@@ -1,0 +1,42 @@
+﻿@model MySchedule.Models.Location
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Location</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <!--<dt>
+            @@Html.DisplayNameFor(model => model.ApplicationUserID)
+        </dt>-->
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Venue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Venue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LocationID }) |
+    @Html.ActionLink("Back to List", "Index", "Categories")
+</p>

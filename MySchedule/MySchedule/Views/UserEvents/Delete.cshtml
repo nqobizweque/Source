@@ -1,0 +1,112 @@
+﻿@model MySchedule.Models.UserEvent
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UserEvent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.ApplicationUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.ApplicationUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.ApplicationUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.ApplicationUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Module.ApplicationUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Module.ApplicationUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reminder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reminder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Recurring)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Recurring)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecurBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecurBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecurIntervals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecurIntervals)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,75 @@
+﻿@model MySchedule.Models.Category
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <h4>Category</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!--<div class="form-group">
+            @@Html.LabelFor(model => model.ApplicationUserID, htmlAttributes: new { @@class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @@Html.EditorFor(model => model.ApplicationUserID, new { @@Value = User.Identity.GetUserName(), htmlAttributes = new { @@class = "form-control" } })
+                @@Html.ValidationMessageFor(model => model.ApplicationUserID, "", new { @@class = "text-danger" })
+            </div>
+        </div>-->
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Abbreviation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Abbreviation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Abbreviation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Colour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <!--<div class="col-md-10">
+                @@Html.EditorFor(model => model.Colour, new { htmlAttributes = new { @@class = "form-control" } })
+                @@Html.ValidationMessageFor(model => model.Colour, "", new { @@class = "text-danger" })
+                <input type="color" id="Colour" value="#93FF93" />
+            </div>-->
+            <div id="Colour" class="input-group colorpicker-component col-md-10">
+                <input type="text" value="#00AABB" class="form-control" />
+                <span class="input-group-addon"><i></i></span>
+            </div>
+            <script>
+                $(function () { $('#Colour').colorpicker(); });
+            </script>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Categories")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
