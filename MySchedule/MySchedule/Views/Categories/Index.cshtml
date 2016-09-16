@@ -13,7 +13,7 @@
         <p>
             @Html.ActionLink("Create New", "Create")
         </p>
-        <table class="table-hover table-striped" >
+        <table class="table-hover table-striped" style="width:100%">
             <tr>
                 <!--<th>
                 @@Html.DisplayNameFor(model => model.ApplicationUserID)
@@ -43,8 +43,8 @@
                         <td style="padding-right: 10px!important;">
                             @Html.DisplayFor(modelItem => item.Abbreviation)
                         </td>
-                        <td style="padding-right: 10px!important;">
-                            @Html.DisplayFor(modelItem => item.Colour)
+                        <td style="padding-right: 10px!important; width: 7px" disabled>
+                            @Html.EditorFor(modelItem => item.Colour, new { htmlAttributes = new { @type="color", @disabled = "disabled" } })
                         </td>
                         <td style="padding-right: 10px!important;">
                             @Html.ActionLink("E", "Edit", new { id = item.CategoryID }) |
@@ -67,7 +67,7 @@
         <p>
             @Html.ActionLink("Create New", "Create", "Locations")
         </p>
-        <table class="table-hover table-striped" style="padding-right: 10px!important;">
+        <table class="table-hover table-striped" style="width:100%">
             <tr>
                 <!--<th>
                     @@Html.DisplayNameFor(model => model.ApplicationUserID)
@@ -108,7 +108,7 @@
         <p>
             @Html.ActionLink("Create New", "Create", "Modules")
         </p>
-        <table class="table-hover table-striped" style="padding-right: 10px!important;">
+        <table class="table-hover table-striped" style="width:100%">
             <tr>
                 <!--<th>
                 @@Html.DisplayNameFor(model => model.ApplicationUserID)

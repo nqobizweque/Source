@@ -14,6 +14,7 @@ namespace MySchedule.Models
         [Required]
         public string ApplicationUserID { get; set; }
 
+        [Display(Name = "Category")]
         public int? CategoryID { get; set; }
         public virtual Category Category { get; set; }
 
