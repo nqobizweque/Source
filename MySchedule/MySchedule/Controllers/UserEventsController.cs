@@ -44,9 +44,9 @@ namespace MySchedule.Controllers
         // GET: UserEvents/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "ApplicationUserID");
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "ApplicationUserID");
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "ApplicationUserID");
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue");
+            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code");
             return View();
         }
 
@@ -57,6 +57,7 @@ namespace MySchedule.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserEventID,ApplicationUserID,CategoryID,ModuleID,LocationID,StartTime,EndTime,Reminder,Recurring,RecurBy,RecurIntervals,Notes")] UserEvent userEvent)
         {
+            userEvent.ApplicationUserID = User.Identity.GetUserName();
             if (ModelState.IsValid)
             {
                 db.UserEvents.Add(userEvent);
@@ -64,9 +65,9 @@ namespace MySchedule.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "ApplicationUserID", userEvent.CategoryID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "ApplicationUserID", userEvent.LocationID);
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "ApplicationUserID", userEvent.ModuleID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", userEvent.CategoryID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue", userEvent.LocationID);
+            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code", userEvent.ModuleID);
             return View(userEvent);
         }
 
@@ -82,9 +83,9 @@ namespace MySchedule.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "ApplicationUserID", userEvent.CategoryID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "ApplicationUserID", userEvent.LocationID);
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "ApplicationUserID", userEvent.ModuleID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", userEvent.CategoryID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue", userEvent.LocationID);
+            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code", userEvent.ModuleID);
             return View(userEvent);
         }
 
@@ -101,9 +102,9 @@ namespace MySchedule.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "ApplicationUserID", userEvent.CategoryID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "ApplicationUserID", userEvent.LocationID);
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "ApplicationUserID", userEvent.ModuleID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", userEvent.CategoryID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue", userEvent.LocationID);
+            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code", userEvent.ModuleID);
             return View(userEvent);
         }
 

@@ -15,7 +15,6 @@ namespace MySchedule.Controllers
 {
     public class CalendarController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
         public class DashboardViewModel
         {
