@@ -13,10 +13,9 @@ namespace MySchedule.Models
         public int CategoryID { get; set; }
 
         [Required]
-        [ScaffoldColumn(false)]
         public string ApplicationUserID { get; set; }
 
-        [Required(ErrorMessage = "Category Description required")]
+        [Required]
         [StringLength(30)]
         public string Description { get; set; }
 
