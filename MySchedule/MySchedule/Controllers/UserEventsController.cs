@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using MySchedule.Models;
 using Microsoft.AspNet.Identity;
-using System.Collections;
 
 namespace MySchedule.Controllers
 {
@@ -44,9 +43,10 @@ namespace MySchedule.Controllers
         // GET: UserEvents/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue");
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code");
+            string appUser = User.Identity.GetUserName();
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "CategoryID", "Description");
+            ViewBag.LocationID = new SelectList(db.Locations.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "LocationID", "Venue");
+            ViewBag.ModuleID = new SelectList(db.Modules.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "ModuleID", "Code");
             return View();
         }
 
@@ -55,19 +55,19 @@ namespace MySchedule.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserEventID,ApplicationUserID,CategoryID,ModuleID,LocationID,StartTime,EndTime,Reminder,Recurring,RecurBy,RecurIntervals,Notes")] UserEvent userEvent)
+        public ActionResult Create([Bind(Include = "UserEventID,ApplicationUserID,Description,CategoryID,ModuleID,LocationID,StartTime,EndTime,Reminder,Recurring,RecurBy,RecurIntervals,Notes")] UserEvent userEvent)
         {
-            userEvent.ApplicationUserID = User.Identity.GetUserName();
-            if (ModelState.IsValid)
+            if (!String.IsNullOrEmpty(userEvent.Description) && !userEvent.StartTime.Equals(null))
             {
+                userEvent.ApplicationUserID = User.Identity.GetUserName();
                 db.UserEvents.Add(userEvent);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", userEvent.CategoryID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue", userEvent.LocationID);
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code", userEvent.ModuleID);
+            string appUser = User.Identity.GetUserName();
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "CategoryID", "Description", userEvent.CategoryID);
+            ViewBag.LocationID = new SelectList(db.Locations.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "LocationID", "Venue", userEvent.LocationID);
+            ViewBag.ModuleID = new SelectList(db.Modules.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "ModuleID", "Code", userEvent.ModuleID);
             return View(userEvent);
         }
 
@@ -83,9 +83,10 @@ namespace MySchedule.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", userEvent.CategoryID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue", userEvent.LocationID);
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code", userEvent.ModuleID);
+            string appUser = User.Identity.GetUserName();
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "CategoryID", "Description", userEvent.CategoryID);
+            ViewBag.LocationID = new SelectList(db.Locations.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "LocationID", "Venue", userEvent.LocationID);
+            ViewBag.ModuleID = new SelectList(db.Modules.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "ModuleID", "Code", userEvent.ModuleID);
             return View(userEvent);
         }
 
@@ -94,7 +95,7 @@ namespace MySchedule.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserEventID,ApplicationUserID,CategoryID,ModuleID,LocationID,StartTime,EndTime,Reminder,Recurring,RecurBy,RecurIntervals,Notes")] UserEvent userEvent)
+        public ActionResult Edit([Bind(Include = "UserEventID,ApplicationUserID,Description,CategoryID,ModuleID,LocationID,StartTime,EndTime,Reminder,Recurring,RecurBy,RecurIntervals,Notes")] UserEvent userEvent)
         {
             if (ModelState.IsValid)
             {
@@ -102,9 +103,10 @@ namespace MySchedule.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", userEvent.CategoryID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue", userEvent.LocationID);
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code", userEvent.ModuleID);
+            string appUser = User.Identity.GetUserName();
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "CategoryID", "Description", userEvent.CategoryID);
+            ViewBag.LocationID = new SelectList(db.Locations.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "LocationID", "Venue", userEvent.LocationID);
+            ViewBag.ModuleID = new SelectList(db.Modules.Where(c => c.ApplicationUserID.Equals(appUser)).ToList(), "ModuleID", "Code", userEvent.ModuleID);
             return View(userEvent);
         }
 

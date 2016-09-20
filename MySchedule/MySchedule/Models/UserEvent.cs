@@ -12,15 +12,21 @@ namespace MySchedule.Models
         public int UserEventID { get; set; }
 
         [Required]
+        [ScaffoldColumn(false)]
         public string ApplicationUserID { get; set; }
+
+        [Required(ErrorMessage = "Description required")]
+        public string Description { get; set; }
 
         [Display(Name = "Category")]
         public int? CategoryID { get; set; }
         public virtual Category Category { get; set; }
 
+        [Display(Name = "Module")]
         public int? ModuleID { get; set; }
         public virtual Module Module { get; set; }
 
+        [Display(Name = "Location/Venue")]
         public int? LocationID { get; set; }
         public virtual Location Location { get; set; }
 

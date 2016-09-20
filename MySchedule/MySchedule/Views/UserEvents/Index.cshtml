@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<MySchedule.Models.UserEvent>
-@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Index";
@@ -13,16 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category.ApplicationUserID)
+            <!--@@Html.DisplayNameFor(model => model.Category.ApplicationUserID)-->
+            Category
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Location.ApplicationUserID)
+            <!--@@Html.DisplayNameFor(model => model.Location.ApplicationUserID)-->
+            "Venue"
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Module.ApplicationUserID)
+            <!--@@Html.DisplayNameFor(model => model.Module.ApplicationUserID)-->
+            "Module"
         </th>
+        <!--<th>
+            @@Html.DisplayNameFor(model => model.ApplicationUserID)
+        </th>-->
         <th>
-            @Html.DisplayNameFor(model => model.ApplicationUserID)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StartTime)
@@ -51,16 +56,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.ApplicationUserID)
+            @Html.DisplayFor(modelItem => item.Category.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Location.ApplicationUserID)
+            @Html.DisplayFor(modelItem => item.Location.Venue)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Module.ApplicationUserID)
+            @Html.DisplayFor(modelItem => item.Module.Code)
         </td>
+        <!--<td>
+            @@Html.DisplayFor(modelItem => item.ApplicationUserID)
+        </td>-->
         <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUserID)
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.StartTime)
