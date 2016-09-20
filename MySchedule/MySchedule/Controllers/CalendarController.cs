@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 
 using DHTMLX.Scheduler;
 using DHTMLX.Common;
 using DHTMLX.Scheduler.Data;
 using DHTMLX.Scheduler.Controls;
+using Microsoft.AspNet.Identity;
 
 using MySchedule.Models;
 namespace MySchedule.Controllers
@@ -45,7 +47,7 @@ namespace MySchedule.Controllers
              */
             
  
-            scheduler.InitialDate = new DateTime(2012, 09, 03);
+            //scheduler.InitialDate = new DateTime(2012, 09, 03);
 
             scheduler.LoadData = true;
             scheduler.EnableDataprocessor = true;
@@ -55,28 +57,10 @@ namespace MySchedule.Controllers
 
         public ContentResult Data()
         {
-            var data = new SchedulerAjaxData(
-                    new List<CalendarEvent>{ 
-                        new CalendarEvent{
-                            id = 1, 
-                            text = "Sample Event", 
-                            start_date = new DateTime(2012, 09, 03, 6, 00, 00), 
-                            end_date = new DateTime(2012, 09, 03, 8, 00, 00)
-                        },
-                        new CalendarEvent{
-                            id = 2, 
-                            text = "New Event", 
-                            start_date = new DateTime(2012, 09, 05, 9, 00, 00), 
-                            end_date = new DateTime(2012, 09, 05, 12, 00, 00)
-                        },
-                        new CalendarEvent{
-                            id = 3, 
-                            text = "Multiday Event", 
-                            start_date = new DateTime(2012, 09, 03, 10, 00, 00), 
-                            end_date = new DateTime(2012, 09, 10, 12, 00, 00)
-                        }
-                    }
-                );
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            var data = new SchedulerAjaxData();
+            data.ServerList.Add("dayoff", db.UserEvents.Where(o => o.Category.Equals(User.Identity.GetUserName())));
             return (ContentResult)data;
         }
 
@@ -86,8 +70,8 @@ namespace MySchedule.Controllers
             
             try
             {
-                var changedEvent = (CalendarEvent)DHXEventsHelper.Bind(typeof(CalendarEvent), actionValues);
-
+                var changedEvent = (UserEvent)DHXEventsHelper.Bind(typeof(UserEvent), actionValues);
+                var data = new ApplicationDbContext();
      
 
                 switch (action.Type)
@@ -95,14 +79,26 @@ namespace MySchedule.Controllers
                     case DataActionTypes.Insert:
                         //do insert
                         //action.TargetId = changedEvent.id;//assign postoperational id
+                        changedEvent.ApplicationUserID = User.Identity.GetUserName();
+                        data.UserEvents.Add(changedEvent);
+                        data.SaveChanges();
                         break;
                     case DataActionTypes.Delete:
                         //do delete
+                        UserEvent eVent = data.UserEvents.Find(changedEvent);
+                        if(eVent != null)
+                        {
+                            UserEventsController con = new UserEventsController();
+                            con.Delete(eVent.UserEventID);
+                        }
                         break;
                     default:// "update"                          
                         //do update
+                        data.Entry(changedEvent).State = EntityState.Modified;
+                        data.SaveChanges();                      
                         break;
                 }
+                action.TargetId = changedEvent.UserEventID;
             }
             catch
             {
