@@ -16,6 +16,9 @@ namespace MySchedule.Models
         public string ApplicationUserID { get; set; }
 
         [Required]
+        public string Description { get; set; }
+
+        [Required]
         [StringLength(20)]
         [Display(Name = "Task Name")]
         public string Title { get; set; }
