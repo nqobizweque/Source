@@ -12,6 +12,7 @@ using MySchedule.ViewModels;
 
 namespace MySchedule.Controllers
 {
+
     public class ContactsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
