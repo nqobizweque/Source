@@ -4,7 +4,37 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<style type="text/css">
+    .green {
+        color: Green;
+    }
+
+    .red {
+        color: Red;
+    }
+</style>
+
+<script type="text/javascript">
+        $(document).ready(function() {
+            $("#btnVerify").click(function() {
+                var name = $("#contactemail").val();
+                var status = $("#divStatus");
+                status.html("Checking....").removeClass();
+                $.post("/Contacts/CheckName", { username: name },
+                    function(data) {
+                        if (data == "true") {
+                            status.html(name + " is available").addClass("green");
+                            document.getElementById(Namelbl).innerHTML = "Name: " + @ViewBag.Conname;
+                            document.getElementById(LNamelbl).innerHTML = "Last Name: " + @ViewBag.Consur;
+                        } else {
+                            status.html(name + " does not exist").addClass("red");
+                        }
+                    });
+            });
+        });
+</script>
+
+<h2>Add New Contact</h2>
 
 
 @using (Html.BeginForm()) 
@@ -15,40 +45,50 @@
         <h4>Contact</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.ApplicationUserID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ApplicationUserID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ApplicationUserID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ContactUserID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactUserID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ContactUserID, new { htmlAttributes = new { @class = "form-control", @id = "contactemail" } })
                 @Html.ValidationMessageFor(model => model.ContactUserID, "", new { @class = "text-danger" })
+                <input type="button" id="btnVerify" value="Verify" />
+                <div id="divStatus" />
+
+            </div>
             </div>
         </div>
 
         <div class="form-group">
+            <p id="Namelbl">Name:</p>
+            <p id="LNamelbl">Last Name: </p>
+        </div>
+
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Add" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Cancel", "Index")
 </div>
 
 @section Scripts {

@@ -73,14 +73,44 @@ namespace MySchedule.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ApplicationUserID,ContactUserID,Date")] Contact contact)
         {
-            if (ModelState.IsValid)
+            if (!String.IsNullOrWhiteSpace(contact.ContactUserID))
             {
-                db.Contacts.Add(contact);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                var count = db.Users.Count(u => u.UserName == contact.ContactUserID);
+
+                if (count != 0)
+                {
+                    contact.ApplicationUserID = User.Identity.Name;
+                    contact.Date = DateTime.Today;
+                    db.Contacts.Add(contact);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                    ModelState.AddModelError("", "User does not exist");
             }
 
             return View(contact);
+        }
+
+        public JsonResult CheckName(FormCollection form)
+        {
+            string name = form["username"];
+            var count = db.Users.Count(u => u.UserName == name);
+            if (count == 0)
+                return Json(false);
+            else
+            {
+                var Conname = (from a in db.Users
+                               where a.Email == name
+                               select a.FirstName).FirstOrDefault();
+                ViewBag.Conname = Conname;
+                var Consur = (from b in db.Users
+                              where b.Email == name
+                              select b.LastName).FirstOrDefault();
+                ViewBag.Consur = Consur;
+                return Json(true);
+            }
         }
 
         // GET: Contacts/Edit/5
@@ -115,26 +145,23 @@ namespace MySchedule.Controllers
         }
 
         // GET: Contacts/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string applicationUserID, string contactUserID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.Find(applicationUserID, contactUserID);
             if (contact == null)
             {
                 return HttpNotFound();
             }
+
             return View(contact);
         }
 
         // POST: Contacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string applicationUserID, string contactUserID)
         {
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.Find(applicationUserID, contactUserID);
             db.Contacts.Remove(contact);
             db.SaveChanges();
             return RedirectToAction("Index");

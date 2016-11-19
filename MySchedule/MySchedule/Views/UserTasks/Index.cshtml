@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MySchedule.Models.UserTask>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h2>tasks</h2>
+
+<p>
+    @Html.ActionLink("Add", "Create")
+</p>
+<table class="table">
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        
+        <th></th>
+    </tr>*@
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status, new {onclick = "window.location ='" +
+           (Url.Action("Complete", "UserTasks", new {id = item.UserTaskID, status = item.Status, complete = DateTime.Now}))
+           + "'"})
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+
+
+        <td>
+            @Html.ActionLink("Modify", "Edit", new { id=item.UserTaskID }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.UserTaskID }) |*@
+          
+        </td>
+    </tr>
+}
+
+</table>

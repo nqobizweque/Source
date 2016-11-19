@@ -4,10 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<style>
+    .btnCat {
+        background-color: #689ACA;
+        color: black;
+        height: 30px;
+        float: left;
+    }
+</style>
+
+<h2>Contacts</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <input type="button" onclick="location.href='@Url.Action("Create", "Contacts")'" class="btnCat" value="Add New" />
+    @*@Html.ActionLink("Create New", "Create")*@
 </p>
 <table class="table">
     <tr>
@@ -21,6 +31,7 @@
     </tr>
 @{
     var users = Model.users;
+    var contacts = Model.contacts;
     @foreach (var item in users)
     {
         <tr>
@@ -34,8 +45,8 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("X", "Delete", new { UserId = User.Identity.Name, ContactUserID = item.Email })
             </td>
         </tr>
     }
