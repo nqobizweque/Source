@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 
+@*Styling for Add New button*@
 <style>
     .btnCat {
         background-color: #689ACA;
@@ -16,8 +17,8 @@
 <h2>Contacts</h2>
 
 <p>
+@*Calls create action result method to add a new contact*@
     <input type="button" onclick="location.href='@Url.Action("Create", "Contacts")'" class="btnCat" value="Add New" />
-    @*@Html.ActionLink("Create New", "Create")*@
 </p>
 <table class="table">
     <tr>
@@ -32,6 +33,8 @@
 @{
     var users = Model.users;
     var contacts = Model.contacts;
+
+    //Displays each contact's First name, last name and email from user list
     @foreach (var item in users)
     {
         <tr>
@@ -46,6 +49,8 @@
             </td>
             <td>
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+
+                @*Calls Delete action result parsing the composite key consisting of current logged in user email and contact email*@
                 @Html.ActionLink("X", "Delete", new { UserId = User.Identity.Name, ContactUserID = item.Email })
             </td>
         </tr>

@@ -29,7 +29,10 @@ namespace MySchedule.Controllers
         // GET: UserTasks
         public ActionResult Index()
         {
+            //Assigns all user tasks belonging to current logged in user to sortedTasks
             var sortedTasks = db.UserTasks.ToList().Where(m => m.ApplicationUserID.Equals(User.Identity.Name));
+
+        //Sorts list of user tasks by status. Checked tasks will be at the bottom of the list. Then sorts by date from oldest to latest
             sortedTasks = sortedTasks.OrderByDescending(d => d.Status).ThenBy(i => i.Date);
             return View(sortedTasks);
         }
