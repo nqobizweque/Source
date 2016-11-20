@@ -51,6 +51,7 @@ namespace MySchedule.Controllers
                 Update();
             }
 
+           
             protected override void OnTimeRangeSelected(TimeRangeSelectedArgs e)
             {
                 var toBeCreated = new UserEvent
@@ -59,10 +60,14 @@ namespace MySchedule.Controllers
                     StartTime = e.Start,
                     EndTime = e.End,
                     Description = (string)e.Data["name"]
-                };              
-                db.UserEvents.Add(toBeCreated);
-                db.SaveChanges();
-                Update();
+                };
+
+                if (!String.IsNullOrWhiteSpace(toBeCreated.Description))
+                {
+                    db.UserEvents.Add(toBeCreated);
+                    db.SaveChanges();
+                    Update();
+                }
             }
 
             protected override void OnFinish()

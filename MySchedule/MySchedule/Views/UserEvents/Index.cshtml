@@ -13,17 +13,18 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category.ApplicationUserID)
+            <!--@@Html.DisplayNameFor(model => model.Description)-->
+            Subject
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Location.ApplicationUserID)
+            @Html.DisplayNameFor(model => model.Location.Venue)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Module.ApplicationUserID)
+            @Html.DisplayNameFor(model => model.Module.Code)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationUserID)
-        </th>
+        <!--<th>
+            @@Html.DisplayNameFor(model => model.ApplicationUserID)
+        </th>-->
         <th>
             @Html.DisplayNameFor(model => model.StartTime)
         </th>
@@ -33,15 +34,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Reminder)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Recurring)
+        <!--<th>
+            @@Html.DisplayNameFor(model => model.Recurring)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RecurBy)
+            @@Html.DisplayNameFor(model => model.RecurBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RecurIntervals)
-        </th>
+            @@Html.DisplayNameFor(model => model.RecurIntervals)
+        </th>-->
         <th>
             @Html.DisplayNameFor(model => model.Notes)
         </th>
@@ -51,17 +52,17 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.ApplicationUserID)
+            @Html.DisplayFor(modelItem => item.Description)           
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Location.ApplicationUserID)
+            @Html.DisplayFor(modelItem => item.Location.Venue)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Module.ApplicationUserID)
+            @Html.DisplayFor(modelItem => item.Module.Code)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUserID)
-        </td>
+        <!--<td>
+            @@Html.DisplayFor(modelItem => item.ApplicationUserID)
+        </td>-->
         <td>
             @Html.DisplayFor(modelItem => item.StartTime)
         </td>
@@ -71,22 +72,22 @@
         <td>
             @Html.DisplayFor(modelItem => item.Reminder)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Recurring)
+        <!--<td>
+            @@Html.DisplayFor(modelItem => item.Recurring)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RecurBy)
+            @@Html.DisplayFor(modelItem => item.RecurBy)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RecurIntervals)
-        </td>
+            @@Html.DisplayFor(modelItem => item.RecurIntervals)
+        </td>-->
         <td>
             @Html.DisplayFor(modelItem => item.Notes)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserEventID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserEventID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserEventID })
+            @Html.ActionLink("E", "Edit", new { id=item.UserEventID }) |
+            @Html.ActionLink("D", "Details", new { id=item.UserEventID }) |
+            @Html.ActionLink("X", "Delete", new { id=item.UserEventID })
         </td>
     </tr>
 }

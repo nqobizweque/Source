@@ -1,14 +1,28 @@
 ﻿@{
     ViewBag.Title = "Dashboard";
 }
-<h2>Events</h2>
+
+<h2 style="width:100%; text-align:center">Monthly Calendar</h2>
+
+<script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/DayPilot/daypilot-all.min.js")" type="text/javascript"></script>
-@Html.DayPilotCalendar("dpc", new DayPilotCalendarConfig
-{
-    BackendUrl = Url.Content("~/Home/Dashboard"),
-    ViewType = DayPilot.Web.Mvc.Enums.Calendar.ViewType.Week,
-    EventMoveHandling = DayPilot.Web.Mvc.Events.Calendar.EventMoveHandlingType.CallBack,
-    EventResizeHandling = DayPilot.Web.Mvc.Events.Calendar.EventResizeHandlingType.CallBack,
-    TimeRangeSelectedHandling = DayPilot.Web.Mvc.Events.Calendar.TimeRangeSelectedHandlingType.JavaScript,
-    TimeRangeSelectedJavaScript = "dpc.timeRangeSelectedCallBack(start, end, null, { name: prompt('New Event Name:', 'New Event') });"
-})
+
+<div style="clear:both; width:100%">
+    <div style="width:20%; float:left">
+        <h4 style="text-align:center">Upcoming Events</h4>
+    </div>
+    <div style="width:78%; float:right">
+        <div style="width:100%; clear:both">
+            <input type="button" value="WeekView" onclick="location.href= '@Url.Action("DashScreen", "Home")'" />
+            <input type="button" style="background-color:white; border-width:0px" value="Month" />
+        </div>
+
+        @Html.DayPilotMonth("dp", new DayPilotMonthConfig
+       {
+           BackendUrl = Url.Content("~/Calender/Backend"),
+           TimeRangeSelectedHandling = DayPilot.Web.Mvc.Events.Month.TimeRangeSelectedHandlingType.JavaScript,
+           TimeRangeSelectedJavaScript = "dp.timeRangeSelectedCallBack(start, end, { name: prompt('New Event Name:', 'New Event') });"
+       })
+    </div>
+
+</div>
