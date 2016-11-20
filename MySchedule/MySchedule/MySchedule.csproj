@@ -240,6 +240,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\UserEventsController.cs" />
+    <Compile Include="Controllers\UserTasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -267,6 +268,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
+    <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -955,6 +957,11 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Calender\Index.cshtml" />
+    <Content Include="Views\UserTasks\Create.cshtml" />
+    <Content Include="Views\UserTasks\Delete.cshtml" />
+    <Content Include="Views\UserTasks\Details.cshtml" />
+    <Content Include="Views\UserTasks\Edit.cshtml" />
+    <Content Include="Views\UserTasks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\App_LocalResources\" />
