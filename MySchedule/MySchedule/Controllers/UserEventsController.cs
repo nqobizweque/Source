@@ -44,9 +44,9 @@ namespace MySchedule.Controllers
         // GET: UserEvents/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "Venue");
-            ViewBag.ModuleID = new SelectList(db.Modules, "ModuleID", "Code");
+            ViewBag.CategoryID = new SelectList(db.Categories.Where(x => x.ApplicationUserID == User.Identity.Name), "CategoryID", "Description");
+            ViewBag.LocationID = new SelectList(db.Locations.Where(i => i.ApplicationUserID == User.Identity.Name), "LocationID", "Venue");
+            ViewBag.ModuleID = new SelectList(db.Modules.Where(z => z.ApplicationUserID == User.Identity.Name), "ModuleID", "Code");
             return View();
         }
 

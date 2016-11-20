@@ -13,13 +13,15 @@
         color: Red;
     }
 </style>
-
+<script type="text/javascript" src="@Url.Content("http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js")"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 <script type="text/javascript">
         $(document).ready(function() {
             $("#btnVerify").click(function() {
-                var name = $("#contactemail").val();
-                var status = $("#divStatus");
-                status.html("Checking....").removeClass();
+                var name = $("#contactemail").val(); //Value entered in the text box
+                var status = $("#divStatus"); //DIV object to display the status message
+                status.html("Checking....").removeClass(); //While our Thread works, we will show some message to indicate the progress
+                //jQuery AJAX Post request
                 $.post("/Contacts/CheckName", { username: name },
                     function(data) {
                         if (data == "true") {
@@ -63,7 +65,7 @@
 
             </div>
             </div>
-        </div>
+       
 
         <div class="form-group">
             <p id="Namelbl">Name:</p>

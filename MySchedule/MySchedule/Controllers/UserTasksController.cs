@@ -16,7 +16,7 @@ namespace MySchedule.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Complete(int id, bool status, DateTime complete)
+        public ActionResult Complete(int id, bool status, DateTime complete, ApplicationUser ApplicationUserID)
         {
             UserTask task = db.UserTasks.Find(id);
             task.Status = status;
@@ -30,7 +30,7 @@ namespace MySchedule.Controllers
         public ActionResult Index()
         {
             var sortedTasks = db.UserTasks.ToList().Where(m => m.ApplicationUserID.Equals(User.Identity.Name));
-            sortedTasks = sortedTasks.OrderByDescending(d => d.Date);
+            sortedTasks = sortedTasks.OrderByDescending(d => d.Status).ThenBy(i => i.Date);
             return View(sortedTasks);
         }
 
@@ -82,14 +82,15 @@ namespace MySchedule.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserTaskID,ApplicationUserID,Title,Date,Status")] UserTask userTask, TaskViewModel tvm)
         {
-            userTask.Title = tvm.Title;
+           
 
-            if (!String.IsNullOrWhiteSpace(userTask.Title))
+            if (!String.IsNullOrWhiteSpace(tvm.Title))
             {
                 userTask.UserTaskID = tvm.UserTaskID;
                 userTask.ApplicationUserID = User.Identity.Name;
                 userTask.Date = DateTime.Today;
                 userTask.Status = false;
+                userTask.Title = tvm.Title;
                 db.UserTasks.Add(userTask);
                 db.SaveChanges();
 
@@ -109,6 +110,26 @@ namespace MySchedule.Controllers
         // GET: UserTasks/Edit/5
         public ActionResult Edit(int? id)
         {
+
+            IEnumerable<ApplicationUser> users = db.Users.ToList();
+
+            IEnumerable<Contact> contacts = db.Contacts.ToList().Where(c => c.ApplicationUserID.Equals(User.Identity.Name));
+
+            List<ApplicationUser> curUsers = new List<ApplicationUser>();
+
+            foreach (var contact in contacts)
+            {
+                foreach (var user in users)
+                {
+                    if (contact.ContactUserID.Equals(user.UserName))
+                    {
+                        curUsers.Add(user);
+                    }
+                }
+            }
+
+            ViewBag.ContactsList = curUsers;
+
             ViewBag.taskid = id;
             if (id == null)
             {
@@ -127,17 +148,15 @@ namespace MySchedule.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserTaskID,ApplicationUserID,Title,Date,Status")] UserTask userTask, TaskViewModel tvm)
+        public ActionResult Edit([Bind(Include = "UserTaskID,ApplicationUserID,Title,Date,Status")] UserTask userTask)
         {
-            userTask.ApplicationUserID = tvm.ApplicationUserID;
-            userTask.Date = tvm.Date;
-            userTask.Status = tvm.Status;
-            userTask.Title = tvm.Title;
+            
 
             if (!String.IsNullOrWhiteSpace(userTask.Title))
             {
                 if (userTask.Date >= DateTime.Today)
                 {
+                               
                     db.Entry(userTask).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");

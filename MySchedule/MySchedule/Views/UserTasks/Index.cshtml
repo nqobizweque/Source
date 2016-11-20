@@ -25,7 +25,7 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Status, new {onclick = "window.location ='" +
-           (Url.Action("Complete", "UserTasks", new {id = item.UserTaskID, status = item.Status, complete = DateTime.Now}))
+           (Url.Action("Complete", "UserTasks", new {id = item.UserTaskID, status = item.Status, complete = DateTime.Now, ApplicationUserID = item.ApplicationUserID}))
            + "'"})
         </td>
         <td>

@@ -12,7 +12,7 @@ using MySchedule.ViewModels;
 
 namespace MySchedule.Controllers
 {
-
+    [Authorize]
     public class ContactsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -95,8 +95,9 @@ namespace MySchedule.Controllers
 
         public JsonResult CheckName(FormCollection form)
         {
+            System.Threading.Thread.Sleep(3000);
             string name = form["username"];
-            var count = db.Users.Count(u => u.UserName == name);
+            var count = db.Users.Count(u => u.UserName.Equals(name));
             if (count == 0)
                 return Json(false);
             else
