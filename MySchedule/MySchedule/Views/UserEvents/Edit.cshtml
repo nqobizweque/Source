@@ -4,31 +4,38 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
+<h2>Edit Event</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>UserEvent</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.UserEventID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, "Subject", htmlAttributes: new {  @class = "control-label col-md-2" })
+        <!--<div class="form-group">
+            @@Html.LabelFor(model => model.ApplicationUserID, htmlAttributes: new { @@class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @placeholder = "Subject", @class = "form-control" } })
+                @@Html.EditorFor(model => model.ApplicationUserID, new { htmlAttributes = new { @@class = "form-control" } })
+                @@Html.ValidationMessageFor(model => model.ApplicationUserID, "", new { @@class = "text-danger" })
+            </div>
+        </div>-->
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Category.Description, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("CategoryID", null, String.Empty, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ModuleID, "Module Code", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ModuleID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ModuleID", null, String.Empty, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ModuleID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LocationID, "Venue", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("LocationID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("LocationID", null, String.Empty, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,8 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartTime, "Start Time", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                
-                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "date-picker form-control" } })
+                @Html.JQueryUI().DatepickerFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -61,7 +67,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndTime, "End Time", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.JQueryUI().DatepickerFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,7 +75,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Reminder, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Reminder, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.JQueryUI().DatepickerFor(model => model.Reminder, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Reminder, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -93,7 +99,7 @@
         </div>
 
         <div class="form-group">
-            @@Html.LabelFor(model => model.RecurIntervals, htmlAttributes: new { @@class = "control-label col-md-2" })
+            @@Html.LabelFor(model => model.RecurIntervals, String.Empty, htmlAttributes: new { @@class = "control-label col-md-2" })
             <div class="col-md-10">
                 @@Html.EditorFor(model => model.RecurIntervals, new { htmlAttributes = new { @@class = "form-control" } })
                 @@Html.ValidationMessageFor(model => model.RecurIntervals, "", new { @@class = "text-danger" })
@@ -103,7 +109,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -117,9 +123,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Admin", "Index", "Categories")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -1,0 +1,121 @@
+﻿@model MySchedule.ViewModels.ReportViewModel
+
+@{
+    ViewBag.Title = "General Report";
+}
+<div style="width:100%; clear:both">
+    <div style="width:65%; float:left">
+        <h1 style="text-align:center">General Report</h1>
+        <h3>Events</h3>
+        <table>
+            <tr>
+                <td style="width:250px">
+                    <b>Tolal Events</b>
+                </td>
+                <td>
+                    @Model.totalEvents
+                </td>
+            </tr>
+            <tr>
+                <td style="width:250px">
+                    <b>Total Upcoming Events</b>
+                </td>
+                <td>
+                    @Model.totalUpcomingEvents
+                </td>
+            </tr>
+        </table>
+
+        <h3>Locations</h3>
+        <table>
+            <tr>
+                <td style="width:250px">
+                    <b>Total Locations</b>
+                </td>
+                <td>@Model.totalLocations</td>
+            </tr>
+            <tr>
+                <td style="width:250px">
+                    <b>Most Frequent Location</b>
+                </td>
+                <td>@Model.mostFreqLocation (@Model.freqLocationCount)</td>
+            </tr>
+            <tr>
+                <td style="width:250px">
+                    <b>Total Locationless Events</b>
+                </td>
+                <td>@Model.totalLocationlessEvents</td>
+            </tr>
+        </table>
+
+        <h3>Cetegories</h3>
+        <table>
+            <tr>
+                <td style="width:250px">
+                    <b>Total Categories</b>
+                </td>
+                <td>@Model.totalCategories</td>
+            </tr>
+            <tr>
+                <td style="width:250px">
+                    <b>Most Frequent Category</b>
+                </td>
+                <td>@Model.mostFreqCategory (@Model.freqCategoryCount)</td>
+            </tr>
+            <tr>
+                <td style="width:250px">
+                    <b>Total Categoryless Events</b>
+                </td>
+                <td>@Model.totalCategorylessEvents</td>
+            </tr>
+        </table>
+
+        <h3>Modules</h3>
+        <table>
+            <tr>
+                <td style="width:250px">
+                    <b>Total Modules</b>
+                </td>
+                <td>@Model.totalModules</td>
+            </tr>
+            <tr>
+                <td style="width:250px">
+                    <b>Most Frequent Module</b>
+                </td>
+                <td>@Model.mostFreqModule (@Model.freqModuleCount)</td>
+            </tr>
+            <tr>
+                <td style="width:250px">
+                    <b>Total Moduleless Events</b>
+                </td>
+                <td>@Model.totalModulessEvents</td>
+            </tr>
+        </table>
+
+        <h3>Tasks</h3>
+        <table>
+            <tr>
+                <td style="width:250px">
+                    <b>Total Tasks</b>
+                </td>
+                <td>@Model.totalTasks</td>
+            </tr>
+            <tr>
+                <td style="width:250px">
+                    <b>ToDo Tasks</b>
+                </td>
+                <td>@Model.totalUpcomingTasks</td>
+            </tr>
+        </table>
+    </div>
+    <div style="width:26%; float:right">
+        <br />
+        <h2 style="text-align:center">Drilldown Report</h2>
+        <h4>@Html.ActionLink("Events Reports", "Events", "Report")</h4>
+        <h4>@Html.ActionLink("Locations Reports", "Locations", "Report")</h4 >
+        <h4>@Html.ActionLink("Categories Reports", "Categories", "Report")</h4>
+        <h4>@Html.ActionLink("Modules Reports", "Modules", "Report")</h4>
+        <h4>@Html.ActionLink("Tasks Reports", "Tasks", "Report")</h4>
+        <h4>@Html.ActionLink("Productivity Reports", "Productivity", "Report")</h4>
+    </div>
+</div>

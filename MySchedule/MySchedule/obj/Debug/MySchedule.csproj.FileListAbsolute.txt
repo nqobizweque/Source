@@ -225,3 +225,5 @@ C:\Users\BL3SS3D\Documents\GitHub\Source\MySchedule\MySchedule\obj\Debug\MySched
 C:\Users\BL3SS3D\Documents\GitHub\Source\MySchedule\MySchedule\bin\EntityFramework.Extended.xml
 C:\Users\BL3SS3D\Documents\GitHub\Source\MySchedule\MySchedule\bin\EntityFramework.SqlServerCompact.xml
 C:\Users\BL3SS3D\Documents\GitHub\Source\MySchedule\MySchedule\bin\LinqKit.xml
+C:\Users\BL3SS3D\Documents\GitHub\Source\MySchedule\MySchedule\bin\JQueryUIHelpers.dll
+C:\Users\BL3SS3D\Documents\GitHub\Source\MySchedule\MySchedule\bin\JQueryUIHelpers.xml

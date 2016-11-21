@@ -4,19 +4,19 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Module Details</h2>
 
 <div>
-    <h4>Module</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <!--<dt>
             @@Html.DisplayNameFor(model => model.ApplicationUserID)
-        </dt>-->
+        </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ApplicationUserID)
-        </dd>
+            @@Html.DisplayFor(model => model.ApplicationUserID)
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.Code)
@@ -38,5 +38,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ModuleID }) |
-    @Html.ActionLink("Back to List", "Index", "Categories")
+    @Html.ActionLink("Back to Admin", "Index", "Categories")
 </p>

@@ -7,14 +7,16 @@ using DayPilot.Web.Mvc;
 using DayPilot.Web.Mvc.Events.Calendar;
 using MySchedule.Models;
 using DayPilot.Web.Mvc.Enums;
+using MySchedule.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace MySchedule.Controllers
 {
 
-    [AllowAnonymous]
+    
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -85,8 +87,9 @@ namespace MySchedule.Controllers
                 DataEndField = "EndTime";
 
             }
-        }     
-       
+        }
+
+        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -94,6 +97,7 @@ namespace MySchedule.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -103,7 +107,13 @@ namespace MySchedule.Controllers
 
         public ActionResult DashScreen()
         {
-            return View("Dashboard");
+            var db = new ApplicationDbContext();
+            var upcoming = new UpcomingViewModel()
+            {
+                UpcomingEvents = db.UserEvents.Where(o => (o.ApplicationUserID.Equals(User.Identity.Name) && o.EndTime >= DateTime.Today)),
+                ToDoTasks = db.UserTasks.Where(o => (o.ApplicationUserID.Equals(User.Identity.Name) && o.Status.Equals(false)))
+            };
+            return View("Dashboard", upcoming);
         }
     }
 }

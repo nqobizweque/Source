@@ -4,44 +4,44 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Delete Event</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>UserEvent</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Category.ApplicationUserID)
+            @Html.DisplayNameFor(model => model.Category.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category.ApplicationUserID)
+            @Html.DisplayFor(model => model.Category.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Location.ApplicationUserID)
+            @Html.DisplayNameFor(model => model.Location.Venue)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Location.ApplicationUserID)
+            @Html.DisplayFor(model => model.Location.Venue)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Module.ApplicationUserID)
+            @Html.DisplayNameFor(model => model.Module.Code)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Module.ApplicationUserID)
+            @Html.DisplayFor(model => model.Module.Code)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUserID)
+        <!--<dt>
+            @@Html.DisplayNameFor(model => model.ApplicationUserID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ApplicationUserID)
-        </dd>
+            @@Html.DisplayFor(model => model.ApplicationUserID)
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.StartTime)
@@ -67,29 +67,29 @@
             @Html.DisplayFor(model => model.Reminder)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Recurring)
+        <!--<dt>
+            @@Html.DisplayNameFor(model => model.Recurring)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Recurring)
+            @@Html.DisplayFor(model => model.Recurring)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RecurBy)
+            @@Html.DisplayNameFor(model => model.RecurBy)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RecurBy)
+            @@Html.DisplayFor(model => model.RecurBy)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RecurIntervals)
+            @@Html.DisplayNameFor(model => model.RecurIntervals)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RecurIntervals)
-        </dd>
+            @@Html.DisplayFor(model => model.RecurIntervals)
+        </dd>-->
 
         <dt>
             @Html.DisplayNameFor(model => model.Notes)
@@ -106,7 +106,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to Admin", "Index", "Categories")
         </div>
     }
 </div>

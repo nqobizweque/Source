@@ -4,16 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Locations List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationUserID)
-        </th>
+        <!--<th>
+            @@Html.DisplayNameFor(model => model.ApplicationUserID)
+        </th>-->
         <th>
             @Html.DisplayNameFor(model => model.Venue)
         </th>
@@ -25,9 +25,9 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUserID)
-        </td>
+        <!--<td>
+            @@Html.DisplayFor(modelItem => item.ApplicationUserID)
+        </td>-->
         <td>
             @Html.DisplayFor(modelItem => item.Venue)
         </td>

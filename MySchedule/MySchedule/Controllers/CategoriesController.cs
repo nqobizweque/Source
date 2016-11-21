@@ -24,6 +24,7 @@ namespace MySchedule.Controllers
             avm.Categories = db.Categories.ToList().Where(o => o.ApplicationUserID.Equals(User.Identity.Name));
             avm.Locations = db.Locations.ToList().Where(o => o.ApplicationUserID.Equals(User.Identity.Name));
             avm.Modules = db.Modules.ToList().Where(o => o.ApplicationUserID.Equals(User.Identity.Name));
+            avm.UserEvents = db.UserEvents.ToList().Where(o => o.ApplicationUserID.Equals(User.Identity.Name));
             return View(avm);
         }
 

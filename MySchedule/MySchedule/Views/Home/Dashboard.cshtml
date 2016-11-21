@@ -1,30 +1,73 @@
-﻿@{
+﻿@model MySchedule.ViewModels.UpcomingViewModel
+@using MySchedule.Models;
+@{
     ViewBag.Title = "Dashboard";
 }
 
-<h2 style="width:100%; text-align:center">Week Calendar</h2>
+<h2 style="width:100%; text-align:center">Dashboard</h2>
 
 <script src="@Url.Content("~/Scripts/DayPilot/daypilot-all.min.js")" type="text/javascript"></script>
 
 <div style="clear:both; width:100%">
-    <div style="width:20%; float:left">
+    <div style="width:15%; float:left; overflow-y: scroll; height:550px">
         <h4 style="text-align:center">Upcoming Events</h4>
+        @Html.ActionLink("New Event", "Create", "UserEvents")
+        @{
+            Model.UpcomingEvents = Model.UpcomingEvents.OrderBy(evnt => evnt.StartTime);
+            foreach (var userEvent in Model.UpcomingEvents)
+            {
+                var db = new ApplicationDbContext();
+                string colour = "#FFFFFF", location = "n/a";
+                if (!userEvent.CategoryID.Equals(null))
+                {
+                    colour = db.Categories.Find(userEvent.CategoryID).Colour;
+                }
+                if (!userEvent.LocationID.Equals(null))
+                {
+                    location = db.Locations.Find(userEvent.LocationID).Venue;
+                }
+                string style = "background-color:" + colour;
+                <div onclick="location.href='@Url.Action("Details", "UserEvents", new { id=userEvent.UserEventID })'" style="width:100%; clear:both; border-radius:2px; padding:2px; border-color:black; border-bottom-width:1px; @style">
+                    <b>@userEvent.Description<br /></b>
+                    Venue: @location<br />
+                    Start: @userEvent.StartTime.Date.ToShortDateString()<br />
+                    End: @userEvent.EndTime.Date.ToShortDateString()<br />
+                </div>
+            }
+        }
     </div>
-    <div style="width:78%; float:right">
-        <div style="width:100%; clear:both">
-            <input type="button" style="background-color:white; border-width:0px" value="WeekView" />
-            <input type="button" value="Month" onclick="location.href= '@Url.Action("Index", "Calender")'" />
+    <div style="width:62%; float:left">
+        <div style="width:100%; height:25px; clear:both">
+            <input type="button" style="float:left; background-color:white; border-width:0px" value="WeekView" />
+            <input type="button" style="float:left; background-color:#0094ff" value="Month" onclick="location.href= '@Url.Action("Index", "Calender")'" />
+            <input type="button" style="float:right; background-color:#0094ff" value=" > " />
+            <input type="button" style="float:right; background-color:#0094ff" value=" < "/>            
         </div>
 
         @Html.DayPilotCalendar("dpc", new DayPilotCalendarConfig
-       {
-           BackendUrl = Url.Content("~/Home/Dashboard"),
-           ViewType = DayPilot.Web.Mvc.Enums.Calendar.ViewType.Week,
-           EventMoveHandling = DayPilot.Web.Mvc.Events.Calendar.EventMoveHandlingType.CallBack,
-           EventResizeHandling = DayPilot.Web.Mvc.Events.Calendar.EventResizeHandlingType.CallBack,
-           TimeRangeSelectedHandling = DayPilot.Web.Mvc.Events.Calendar.TimeRangeSelectedHandlingType.JavaScript,
-           TimeRangeSelectedJavaScript = "dpc.timeRangeSelectedCallBack(start, end, null, { name: prompt('New Event Name:', 'New Event') });"
-       })
+   {
+       BackendUrl = Url.Content("~/Home/Dashboard"),
+       ViewType = DayPilot.Web.Mvc.Enums.Calendar.ViewType.Week,
+       EventMoveHandling = DayPilot.Web.Mvc.Events.Calendar.EventMoveHandlingType.CallBack,
+       EventResizeHandling = DayPilot.Web.Mvc.Events.Calendar.EventResizeHandlingType.CallBack,
+       TimeRangeSelectedHandling = DayPilot.Web.Mvc.Events.Calendar.TimeRangeSelectedHandlingType.JavaScript,
+       TimeRangeSelectedJavaScript = "dpc.timeRangeSelectedCallBack(start, end, null, { name: prompt('New Event Name:', 'New Event') });"
+   })
     </div>
+    <div style="width:20%; float:right; overflow-y: scroll; height:550px">
+        <h4 style="text-align:center">Tasks ToDo</h4>
+        <div style="float:left">@Html.ActionLink("New Task", "Create", "UserTasks")</div>
+        <div style="float:right; padding-right:2px">@Html.ActionLink("All Tasks", "Index", "UserTasks")</div>
+        @{
+            
+            foreach (var task in Model.ToDoTasks)
+            {
 
+                <div onclick="location.href='@Url.Action("Details", "UserTasks", new { id=task.UserTaskID })'" style="width:100%; clear:both; padding:2px;">
+                    @Html.DisplayFor(model => task.Status)
+                    <b >@task.Title</b>
+                </div>
+            }
+        }
+    </div>
 </div>

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DayPilot.Web.Mvc;
 using DayPilot.Web.Mvc.Events.Month;
 using MySchedule.Models;
+using MySchedule.ViewModels;
 using DayPilot.Web.Mvc.Enums;
 
 namespace MySchedule.Controllers
@@ -15,7 +16,15 @@ namespace MySchedule.Controllers
         // GET: Calender
         public ActionResult Index()
         {
-            return View();
+            /*Yeyethu was here*/
+            var db = new ApplicationDbContext();
+
+            var upcoming = new UpcomingViewModel()
+            {
+                UpcomingEvents = db.UserEvents.Where(o => (o.ApplicationUserID.Equals(User.Identity.Name) && o.EndTime >= DateTime.Today)),
+                ToDoTasks = db.UserTasks.Where(o => (o.ApplicationUserID.Equals(User.Identity.Name) && o.Status.Equals(false)))
+            };
+            return View(upcoming);
         }
 
         public ActionResult Backend()
